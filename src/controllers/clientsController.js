@@ -14,7 +14,7 @@ const createdNewClientController = async (request, response) => {
 
 // Endpoint para remover um cliente...
 const removeClientController = async (request, response) => {
-    const removeClient = await clientsModel.removeClient(request.params);
+    const removeClient = await clientsModel.removeClient(request);
     return response.status(204).send();
 };
 

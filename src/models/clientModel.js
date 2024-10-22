@@ -10,10 +10,13 @@ const getAllClients = async () => {
 
 // Metodo que cria novo cliente...
 const createdNewClient = async (dataNewClient) => {
-    const requestBody = dataNewClient.name;
-    const query = "INSERT INTO table_client(client_name) VALUES (?)";
+    const clientName = dataNewClient.name;
+    const clientAddress = dataNewClient.address;
+    const clientTelephone = dataNewClient.telephone;
 
-    const [newClient] = await database.execute(query, [requestBody]);
+    const query = "INSERT INTO table_client(client_name, client_address, client_telephone) VALUES (?, ?, ?)";
+
+    const [newClient] = await database.execute(query, [clientName, clientAddress, clientTelephone]);
 
     console.log(newClient.insertId);
     return "Usuário salvo!!!";
@@ -22,8 +25,8 @@ const createdNewClient = async (dataNewClient) => {
 // Metodo que remove cliente....
 const removeClient = async (cod_client) => {
     
-    const requestBody = cod_client;
-    const query = "DELETE FROM table_client WHERE cod_client = ?";
+    const requestBody = cod_client.params.id;
+    const query = "DELETE FROM table_client WHERE id_client = ?";
 
     const clientRemoved = database.execute(query, [requestBody]);
 }
