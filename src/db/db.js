@@ -20,9 +20,9 @@ const connection = mysql.createPool({
         console.log("Conexão com Banco de Dados realizada com sucesso!!!");
         verifyConnectionDb.release();    
     }
-    catch
+    catch(error)
     {
-        console.error("Conexão com o Banco de Dados mal-sucedida...");
+        console.error("Conexão com o Banco de Dados mal-sucedida...", error);
     }
 })();
 
