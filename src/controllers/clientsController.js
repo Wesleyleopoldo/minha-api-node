@@ -18,6 +18,7 @@ const removeClientController = async (request, response) => {
     return response.status(204).send();
 };
 
+
 // Exportando módulos...
 module.exports = {
     getAllClientsController,
