@@ -6,7 +6,7 @@ const dotEnv = require("dotenv");
 dotEnv.config();
 
 // Declarando a constante que vai armazenar o número da porta onde a aplicação vai rodar...
-const PORT = process.env.PORT || 3333;
+const PORT = process.env.PORT;
 
 // Iniciando aplicação na porta 3333...
 app.listen(PORT, () => {
