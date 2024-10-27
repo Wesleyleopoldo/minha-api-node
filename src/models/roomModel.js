@@ -15,7 +15,7 @@ const createRoomModel = async (dataRoomType, diariesPrice) => {
     return newRoom;
 };
 
-const getAllRooms = async () => {
+const indexAllRooms = async () => {
     const query = "SELECT roomId, room_type, diaries_price FROM room";
     const getAllRooms = await database.execute(query);
     return getAllRooms;
@@ -25,11 +25,11 @@ const getAllRooms = async () => {
 const findRoomById = async (id) => {
     const query = "SELECT roomId, room_type, diaries_price FROM room WHERE roomId = ?";
 
-    const [roomList] = await database.execute(query, [id]);
+    const roomList = await database.execute(query, [id]);
 
     return roomList;
 }
 module.exports = {
     createRoomModel,
-    getAllRooms
+    indexAllRooms
 }

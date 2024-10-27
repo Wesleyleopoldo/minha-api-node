@@ -1,27 +1,27 @@
-const clientsModel = require("../models/clientModel");
+const clientsServices = require("../services/clientService");
 
 // Endpoint para listar todos os clientes...
-const getAllClientsController = async (requeste, response) => {
-    const clients = await clientsModel.getAllClients();
-    return response.status(200).json(clients);
+const indexAllClientsController = async (requeste, response) => {
+    const indexClients = await clientsServices.indexAllClients();
+    return response.status(200).json(indexClients);
 };
 
 // Endpoint para criar novo cliente...
 const createdNewClientController = async (request, response) => {
-    const newClient = await clientsModel.createdNewClient(request.body);
+    const newClient = await clientsServices.createdNewClient(request.body);
     return response.status(201).json(newClient);
 };
 
 // Endpoint para remover um cliente...
-const removeClientController = async (request, response) => {
-    const removeClient = await clientsModel.removeClient(request);
+const destroyClientController = async (request, response) => {
+    const destroyClient = await clientsServices.destroyClient(request);
     return response.status(204).send();
 };
 
 
 // Exportando módulos...
 module.exports = {
-    getAllClientsController,
+    indexAllClientsController,
     createdNewClientController,
-    removeClientController
+    destroyClientController
 };

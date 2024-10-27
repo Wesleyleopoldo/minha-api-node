@@ -7,12 +7,12 @@ const roomController = require("./controllers/roomController");
 const router = express.Router();
 
 // Rotas para  para clientes...
-router.get("/clients", clientsController.getAllClientsController);
+router.get("/clients", clientsController.indexAllClientsController);
 router.post("/clients", clientsController.createdNewClientController);
-router.delete("/clients/:id", clientsController.removeClientController);
+router.delete("/clients/:id", clientsController.destroyClientController);
 // router.post("/reservation/:id", reservationController.createReservation);
 router.post("/room", roomController.createRoomController);
-router.get("/room", roomController.getAllRoomsController);
+router.get("/room", roomController.indexAllRoomsController);
 
 // Exportando o modulo router...
 module.exports = router;

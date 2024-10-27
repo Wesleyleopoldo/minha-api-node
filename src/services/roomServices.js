@@ -7,25 +7,21 @@ const createNewRoomServices = async (request) => {
     const roomtype = request.roomtype;
     const roomdiariesprice = request.diariesprice;
 
-    const createdNewRoom = await databaseModel.createRoomModel(roomtype, roomdiariesprice);
+    const [createdNewRoom] = await databaseModel.createRoomModel(roomtype, roomdiariesprice);
 
     const responseDTO = convertForDTO(createdNewRoom);
 
     return responseDTO;
 };
 
-const getAllRooms = async () => {
-    const [allRooms] = await databaseModel.getAllRooms();
-
-    console.log(allRooms);
+const indexAllRooms = async () => {
+    const [allRooms] = await databaseModel.indexAllRooms();
 
     /* 
      * Nessa linha estou usando o map para transformar cada linha do banco de dados em um novo "Objeto"
      * E jogando esse novo objeto dentro de um array...
      */
     const responseDTO = convertForDTO(allRooms);
-
-    console.log(responseDTO);
 
     return responseDTO;
 };
@@ -38,5 +34,5 @@ function convertForDTO (rooms)
 
 module.exports = {
     createNewRoomServices,
-    getAllRooms
+    indexAllRooms
 };

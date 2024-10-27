@@ -6,13 +6,13 @@ const createRoomController = async (request, response) => {
     return response.status(200).json(createdRoom);
 };
 
-const getAllRoomsController = async (_request, response) => {
-    const getAllRooms = await roomServices.getAllRooms();
+const indexAllRoomsController = async (_request, response) => {
+    const indexAllRooms = await roomServices.indexAllRooms();
 
-    return response.status(200).json(getAllRooms);
+    return response.status(200).json(indexAllRooms);
 };
 
 module.exports = {
     createRoomController,
-    getAllRoomsController
+    indexAllRoomsController
 }
