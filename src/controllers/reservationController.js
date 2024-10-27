@@ -1,6 +1,12 @@
+const reservationServices = require("../services/reservationServices");
 
+const createReservation = async (request, response) => {
 
-// const createReservation = async (request, response) => {
+    const createReservationModel = await reservationServices.createReservation(request.body, request.params);
 
-//     const createReservationModel = await 
-// };
+    return response.status(201).json(createReservationModel);
+};
+
+module.exports = {
+    createReservation
+}
