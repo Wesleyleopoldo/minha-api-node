@@ -8,13 +8,13 @@ const indexAllClientsController = async (requeste, response) => {
 
 // Endpoint para criar novo cliente...
 const createdNewClientController = async (request, response) => {
-    const newClient = await clientsServices.createdNewClient(request.body);
+    const newClient = await clientsServices.createNewClientServices(request.body);
     return response.status(201).json(newClient);
 };
 
 // Endpoint para remover um cliente...
 const destroyClientController = async (request, response) => {
-    const destroyClient = await clientsServices.destroyClient(request);
+    const destroyClient = await clientsServices.destroyClientById(request.params);
     return response.status(204).send();
 };
 

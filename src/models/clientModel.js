@@ -1,39 +1,48 @@
 const database = require("../db/db");
 
 // Metodo que lista todos os clientes...
-const getAllClients = async () => {
+const indexAllClients = async () => {
 
-    const query = "SELECT * FROM table_client";
-    const [clients] = await database.execute(query);
+    const query = "SELECT clientId, client_name, client_address, client_telephone FROM table_client";
+    const clients = await database.execute(query);
     return clients;
 };
 
 // Metodo que cria novo cliente...
-const createdNewClient = async (dataNewClient) => {
-    const clientName = dataNewClient.name;
-    const clientAddress = dataNewClient.address;
-    const clientTelephone = dataNewClient.telephone;
+const createdNewClient = async (ClientName, ClientAddress, ClientTelephone) => {
+    const newClientName = ClientName;
+    const newClientAddress = ClientAddress;
+    const newClientTelephone = ClientTelephone
 
     const query = "INSERT INTO table_client(client_name, client_address, client_telephone) VALUES (?, ?, ?)";
 
-    const [newClient] = await database.execute(query, [clientName, clientAddress, clientTelephone]);
+    const [createdClient] = await database.execute(query, [newClientName, newClientAddress, newClientTelephone]);
 
-    console.log(newClient.insertId);
-    return "Usuário salvo!!!";
+    const id = createdClient.insertId;
+
+    const newClient = findClientById(id);
+
+    return newClient;
 };
 
 // Metodo que remove cliente....
-const removeClient = async (cod_client) => {
-    
-    const requestBody = cod_client.params.id;
-    const query = "DELETE FROM table_client WHERE id_client = ?";
+const destroyClient = async (clientId) => {
 
-    const clientRemoved = database.execute(query, [requestBody]);
+    const query = "DELETE FROM table_client WHERE clientId = ?";
+
+    const clientDestroyed = database.execute(query, [clientId]);
 }
 
+const findClientById = async (id) => {
+    const query = "SELECT clientId, client_name, client_address, client_telephone FROM table_client WHERE clientId = ?";
+
+    const newClient = await database.execute(query, [id]);
+
+    return newClient;
+}
 // Exportando os metodos...
 module.exports = {
-    getAllClients,
+    indexAllClients,
     createdNewClient,
-    removeClient
+    destroyClient
 };
