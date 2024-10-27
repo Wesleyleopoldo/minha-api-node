@@ -1,7 +1,7 @@
 const clientsServices = require("../services/clientService");
 
 // Endpoint para listar todos os clientes...
-const indexAllClientsController = async (requeste, response) => {
+const indexAllClientsController = async (_requeste, response) => {
     const indexClients = await clientsServices.indexAllClients();
     return response.status(200).json(indexClients);
 };

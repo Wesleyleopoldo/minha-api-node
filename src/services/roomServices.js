@@ -26,6 +26,12 @@ const indexAllRooms = async () => {
     return responseDTO;
 };
 
+const destroyRoom = async (request) => {
+    const id = request.id;
+
+    const clientDestroyed = await databaseModel.destroyRoom(id);
+};
+
 function convertForDTO (rooms) 
 {
     const convertedForDTO = rooms.map(room => new roomDTO(room.roomId, room.room_type, room.diaries_price));
@@ -34,5 +40,6 @@ function convertForDTO (rooms)
 
 module.exports = {
     createNewRoomServices,
-    indexAllRooms
+    indexAllRooms,
+    destroyRoom
 };

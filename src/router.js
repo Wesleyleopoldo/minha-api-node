@@ -13,6 +13,7 @@ router.delete("/clients/:id", clientsController.destroyClientController);
 // router.post("/reservation/:id", reservationController.createReservation);
 router.post("/room", roomController.createRoomController);
 router.get("/room", roomController.indexAllRoomsController);
+router.delete("/room/:id", roomController.destroyRoomController);
 
 // Exportando o modulo router...
 module.exports = router;

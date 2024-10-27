@@ -15,6 +15,14 @@ const createRoomModel = async (dataRoomType, diariesPrice) => {
     return newRoom;
 };
 
+const destroyRoom = async (id) => {
+
+    const roomId = id;
+    const query = "DELETE FROM room WHERE roomId = ?";
+
+    const destroyedRoom = await database.execute(query, [roomId]);
+}
+
 const indexAllRooms = async () => {
     const query = "SELECT roomId, room_type, diaries_price FROM room";
     const getAllRooms = await database.execute(query);
@@ -31,5 +39,6 @@ const findRoomById = async (id) => {
 }
 module.exports = {
     createRoomModel,
-    indexAllRooms
+    indexAllRooms,
+    destroyRoom
 }
