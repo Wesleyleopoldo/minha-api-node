@@ -12,6 +12,7 @@ router.post("/clients", clientsController.createdNewClientController);
 router.delete("/clients/:id", clientsController.removeClientController);
 // router.post("/reservation/:id", reservationController.createReservation);
 router.post("/room", roomController.createRoomController);
+router.get("/room", roomController.getAllRoomsController);
 
 // Exportando o modulo router...
 module.exports = router;

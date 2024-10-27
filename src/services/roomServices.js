@@ -1,18 +1,42 @@
 const databaseModel = require("../models/roomModel");
 const roomDTO = require("../dtos/roomDTO");
 
+
+
 const createNewRoomServices = async (request) => {
-    const roomType = request.roomtype;
-    const roomDiariesPrice = request.diariesprice;
+    const roomtype = request.roomtype;
+    const roomdiariesprice = request.diariesprice;
 
-    const [createdNewRoom] = await databaseModel.createRoomModel(roomType, roomDiariesPrice);
+    const createdNewRoom = await databaseModel.createRoomModel(roomtype, roomdiariesprice);
 
-    const responseDTO = new roomDTO(createdNewRoom.insertId ,createdNewRoom.room_type, createdNewRoom.diaries_price);
-    JSON.stringify(responseDTO);
+    const responseDTO = convertForDTO(createdNewRoom);
 
     return responseDTO;
-}
+};
+
+const getAllRooms = async () => {
+    const [allRooms] = await databaseModel.getAllRooms();
+
+    console.log(allRooms);
+
+    /* 
+     * Nessa linha estou usando o map para transformar cada linha do banco de dados em um novo "Objeto"
+     * E jogando esse novo objeto dentro de um array...
+     */
+    const responseDTO = convertForDTO(allRooms);
+
+    console.log(responseDTO);
+
+    return responseDTO;
+};
+
+function convertForDTO (rooms) 
+{
+    const convertedForDTO = rooms.map(room => new roomDTO(room.roomId, room.room_type, room.diaries_price));
+    return convertedForDTO;
+};
 
 module.exports = {
-    createNewRoomServices
+    createNewRoomServices,
+    getAllRooms
 };
