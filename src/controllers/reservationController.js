@@ -25,9 +25,16 @@ const updateCheckout = async (request, response) => {
     return response.status(200).json(updateCheckout);
 }
 
+const destroyReservation = async (request, response) => {
+    const destroyReservation = await reservationServices.destroyReservation(request.params);
+
+    return response.status(204).json(destroyReservation);
+}
+
 module.exports = {
     createReservation,
     indexAllReservation,
     updateCheckin,
-    updateCheckout
+    updateCheckout,
+    destroyReservation
 }
