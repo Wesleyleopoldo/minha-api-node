@@ -1,4 +1,5 @@
 const database = require("../db/db");
+const clientDatas = require("./clientModel");
 
 const createReservationModel = async (reservation_date, client_id, room_id) => {
 
@@ -26,17 +27,39 @@ const indexAllReservationModel = async () => {
     return allReservations;
 };
 
+const updateCheckin = async (reservation_Id, checkin_date, fk_clientId) => {
+    const reservationId = reservation_Id;
+    const checkinDate = checkin_date;
+    const clientId = fk_clientId;
+
+    const query = "UPDATE reservation SET checkin_date = ? WHERE reservationId = ?";
+
+    const updatedCheckin = await database.execute(query, [checkinDate, reservationId]);
+
+    const id = clientId;
+
+    const [client] = await clientDatas.findClientById(id);
+    const [reservation] = await findReservationById(reservationId);
+
+    console.log(reservation);
+
+    client.push(reservation);
+
+    return client;
+};
+
 const findReservationById = async (id) => {
     const reservationId = id;
 
     const query = "SELECT reservationId, reservation_date, checkin_date, checkout_date, fk_clientId, fk_roomId FROM reservation WHERE reservationId = ?";
 
-    const reservation = await database.execute(query, [reservationId]);
+    const [reservation] = await database.execute(query, [reservationId]);
 
     return reservation;
 };
 
 module.exports = {
     createReservationModel,
-    indexAllReservationModel
+    indexAllReservationModel,
+    updateCheckin
 }
