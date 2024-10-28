@@ -44,5 +44,6 @@ const findClientById = async (id) => {
 module.exports = {
     indexAllClients,
     createdNewClient,
-    destroyClient
+    destroyClient,
+    findClientById
 };
