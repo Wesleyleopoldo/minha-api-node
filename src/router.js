@@ -19,6 +19,7 @@ router.post("/reservation/:id", reservationController.createReservation);
 router.get("/reservation", reservationController.indexAllReservation);
 router.put("/reservation/:id/checkin", reservationController.updateCheckin);
 router.put("/reservation/:id/checkout", reservationController.updateCheckout);
+router.delete("/reservation/:id", reservationController.destroyReservation);
 
 // Exportando o modulo router...
 module.exports = router;
