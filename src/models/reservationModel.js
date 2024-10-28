@@ -41,7 +41,24 @@ const updateCheckin = async (reservation_Id, checkin_date, fk_clientId) => {
     const [client] = await clientDatas.findClientById(id);
     const [reservation] = await findReservationById(reservationId);
 
-    console.log(reservation);
+    client.push(reservation);
+
+    return client;
+};
+
+const updateCheckout = async (reservation_Id, checkout_date, fk_clientId) => {
+    const reservationId = reservation_Id;
+    const checkoutDate = checkout_date;
+    const clientId = fk_clientId;
+
+    const query = "UPDATE reservation SET checkout_date = ? WHERE reservationId = ?";
+
+    const updatedCheckout = await database.execute(query, [checkoutDate, reservationId]);
+
+    const id = clientId;
+
+    const [client] = await clientDatas.findClientById(id);
+    const [reservation] = await findReservationById(reservationId);
 
     client.push(reservation);
 
@@ -61,5 +78,6 @@ const findReservationById = async (id) => {
 module.exports = {
     createReservationModel,
     indexAllReservationModel,
-    updateCheckin
+    updateCheckin,
+    updateCheckout
 }
