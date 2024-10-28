@@ -13,7 +13,14 @@ const indexAllReservation = async(_request, response) => {
     return response.status(200).json(indexAllReservations);
 };
 
+const updateCheckin = async (request, response) => {
+    const updateCheckin = await reservationServices.updateCheckin(request.body, request.params);
+
+    return response.status(200).json(updateCheckin);
+}
+
 module.exports = {
     createReservation,
-    indexAllReservation
+    indexAllReservation,
+    updateCheckin
 }
