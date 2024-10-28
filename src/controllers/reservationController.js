@@ -17,10 +17,17 @@ const updateCheckin = async (request, response) => {
     const updateCheckin = await reservationServices.updateCheckin(request.body, request.params);
 
     return response.status(200).json(updateCheckin);
+};
+
+const updateCheckout = async (request, response) => {
+    const updateCheckout = await reservationServices.updateCheckout(request.body, request.params);
+
+    return response.status(200).json(updateCheckout);
 }
 
 module.exports = {
     createReservation,
     indexAllReservation,
-    updateCheckin
+    updateCheckin,
+    updateCheckout
 }
