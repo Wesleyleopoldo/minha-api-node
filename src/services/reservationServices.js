@@ -39,14 +39,20 @@ const updateCheckout = async (body, params) => {
     const checkoutDate = body.checkout_date;
     const clientId = params.id;
 
-
-    console.log(clientId);
     const updatedCheckout = await database.updateCheckout(reservationId, checkoutDate, clientId);
 
     const responseDTO = convertAllDatasOfReservations(updatedCheckout);
 
     return responseDTO;
 };
+
+const destroyReservation = async (params) => {
+    const reservationId = params.id;
+
+    const [destroyedReservation] = await database.destroyReservation(reservationId);
+
+    return destroyedReservation;
+}
 
 function convertForDTO(reservationdata) {
     const newReservation = reservationdata.map(reservation => new reservationDTO.reservationDTO(reservation.reservationId, reservation.reservation_date, reservation.checkin_date,reservation.checkout_date, reservation.fk_clientId, reservation.fk_roomId));
@@ -64,5 +70,6 @@ module.exports = {
     createReservation,
     indexAllReservationsServices,
     updateCheckin,
-    updateCheckout
+    updateCheckout,
+    destroyReservation
 };
