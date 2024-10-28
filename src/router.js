@@ -14,7 +14,9 @@ router.delete("/clients/:id", clientsController.destroyClientController);
 router.post("/room", roomController.createRoomController);
 router.get("/room", roomController.indexAllRoomsController);
 router.delete("/room/:id", roomController.destroyRoomController);
+
 router.post("/reservation/:id", reservationController.createReservation);
+router.get("/reservation", reservationController.indexAllReservation);
 
 // Exportando o modulo router...
 module.exports = router;
