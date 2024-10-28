@@ -17,8 +17,8 @@ router.delete("/room/:id", roomController.destroyRoomController);
 
 router.post("/reservation/:id", reservationController.createReservation);
 router.get("/reservation", reservationController.indexAllReservation);
-router.put("/reservation/:id", reservationController.updateCheckin);
-// router.put("/reservation/:id", reservationController.updateCheckout);
+router.put("/reservation/:id/checkin", reservationController.updateCheckin);
+router.put("/reservation/:id/checkout", reservationController.updateCheckout);
 
 // Exportando o modulo router...
 module.exports = router;
