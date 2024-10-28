@@ -1,4 +1,8 @@
-global.db = require("./db/db");
+/**
+ * @author Wesley Cauan Leopoldo da Silva
+ * @version 1.0.1
+ * @since 28/10/2024
+ */
 const express = require("express");
 const router = require("./router");
 const app = express();
