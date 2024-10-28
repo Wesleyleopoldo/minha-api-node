@@ -12,12 +12,27 @@ const createReservation = async (body, params) => {
 
     return responseDTO;
 
-}
+};
+
+const indexAllReservationsServices = async () => {
+    const [allReservations] = await database.indexAllReservationModel();
+
+    const responseDTO = convertAllDatasOfReservations(allReservations);
+
+    return responseDTO;
+};
 
 function convertForDTO(reservationdata) {
-    const newReservation = reservationdata.map(reservation => new reservationDTO(reservation.reservationId, reservation.reservation_date, reservation.fk_clientId, reservation.fk_roomId));
+    const newReservation = reservationdata.map(reservation => new reservationDTO.reservationDTO(reservation.reservationId, reservation.reservation_date, reservation.checkin_date,reservation.checkout_date, reservation.fk_clientId, reservation.fk_roomId));
     return newReservation;
 }
+// Converte dados especificos para retornar no indexAllReservations...
+function convertAllDatasOfReservations(allDatas) {
+    const allDatasOfReservations = allDatas.map(allDataReservations => new reservationDTO.allDatasOfReservationsDTO(allDataReservations.reservationId, allDataReservations.reservation_date, allDataReservations.checkin_date, allDataReservations.checkout_date, allDataReservations.client_name, allDataReservations.client_address, allDataReservations.client_telephone, allDataReservations.room_type, allDataReservations.diaries_price));
+    return allDatasOfReservations;
+};
+
 module.exports = {
-    createReservation
+    createReservation,
+    indexAllReservationsServices
 }
