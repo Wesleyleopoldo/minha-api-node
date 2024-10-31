@@ -2,13 +2,14 @@ const express = require("express");
 const clientsController = require("./controllers/clientsController");
 const roomController = require("./controllers/roomController");
 const reservationController = require("./controllers/reservationController");
+const middleware = require("./middlewares/middleware");
 
 // Declarando a constante que tem o método de rotas do express...
 const router = express.Router();
 
 // Rotas para  para clientes...
 router.get("/clients", clientsController.indexAllClientsController);
-router.post("/clients", clientsController.createdNewClientController);
+router.post("/clients", middleware.validationBodyCreateClient, clientsController.createdNewClientController);
 router.delete("/clients/:id", clientsController.destroyClientController);
 
 router.post("/room", roomController.createRoomController);
