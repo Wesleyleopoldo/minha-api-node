@@ -9,11 +9,28 @@ const validationBodyCreateClient = (request, response, next) => {
     {
         response.status(400).json({ message: "Nenhum dos campos podem ser vázios!!!"});
     }
-
-    next();
+    else
+    {
+        next();
+    }
+    
 };
+
+const validationParam = (request, response, next) => {
+    const params = request.params;
+
+    if(params.id == undefined || params.id == "")
+    {
+        response.status(400).json({ message: "Faltam alguns paramêtros!!!" });
+    }
+    else
+    {
+        next();
+    }
+    
+}
 
 module.exports ={
     validationBodyCreateClient,
-
+    validationParam
 }
