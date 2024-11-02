@@ -16,21 +16,42 @@ const validationBodyCreateClient = (request, response, next) => {
     
 };
 
-const validationParam = (request, response, next) => {
-    const params = request.params;
+const validationBodyCreateRoom = (request, response, next) => {
+    const { body } = request;
 
-    if(params.id == undefined || params.id == "")
+    if(body.roomtype === undefined || body.diariesprice === undefined)
     {
-        response.status(400).json({ message: "Faltam alguns paramêtros!!!" });
+        return response.status(400).json({ message: "Request Payload is Empty!!!" });
+    }
+    if(body.roomtype === "" || body.diariesprice === null)
+    {
+        return response.status(400).json({ message: "Request Payload is Empty!!!"});
     }
     else
     {
         next();
     }
-    
+}
+
+const validationBodyCreateReservation = (request, response, next) => {
+    const { body } = request;
+
+    if(body.reservation_date === undefined || body.roomId === undefined)
+    {
+        return response.status(400).json({ message: "Request Payload is Empty!!!" });
+    }
+    if(body.reservation_date === null || body.roomId === null)
+    {
+        return response.status(400).json({ message: "Request Payload is Empty!!!" });
+    }
+    else
+    {
+        next();
+    }
 }
 
 module.exports ={
     validationBodyCreateClient,
-    validationParam
+    validationBodyCreateRoom,
+    validationBodyCreateReservation
 }
