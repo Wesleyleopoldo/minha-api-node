@@ -65,6 +65,16 @@ const updateCheckout = async (reservation_Id, checkout_date, fk_clientId) => {
     return client;
 };
 
+const destroyReservationModel = async (id) => {
+    const reservationId = id;
+
+    const query = "DELETE FROM reservation WHERE reservationId = ?";
+
+    const destroyedReservation = database.execute(query, [reservationId]);
+
+    return destroyedReservation;
+}
+
 const findReservationById = async (id) => {
     const reservationId = id;
 
@@ -79,5 +89,6 @@ module.exports = {
     createReservationModel,
     indexAllReservationModel,
     updateCheckin,
-    updateCheckout
+    updateCheckout,
+    destroyReservationModel
 }

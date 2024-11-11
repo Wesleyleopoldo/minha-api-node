@@ -6,7 +6,10 @@
 const express = require("express");
 const router = require("./router");
 const app = express();
+const cors = require("cors");
 
+
+app.use(cors());
 // Utilizando o express.json para lidar com requisições que usam o json como body...
 app.use(express.json());
 // Utilizando os métodos do arquivo routes....

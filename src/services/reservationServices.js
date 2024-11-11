@@ -49,7 +49,7 @@ const updateCheckout = async (body, params) => {
 const destroyReservation = async (params) => {
     const reservationId = params.id;
 
-    const [destroyedReservation] = await database.destroyReservation(reservationId);
+    const [destroyedReservation] = await database.destroyReservationModel(reservationId);
 
     return destroyedReservation;
 }
