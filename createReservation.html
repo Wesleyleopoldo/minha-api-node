@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Reserva de Quarto</title>
+</head>
+<body class="createReservation">
+    <div class="reservation-container">
+        <h2>Reserva de Quarto</h2>
+        <div id="reservationForm">
+            <div class="form-group">
+                <label for="clientId">ID do Cliente</label>
+                <input type="number" id="clientId" placeholder="Digite o ID do cliente" name="clientId" required>
+                <label for="date">Data da Reserva</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label>Escolha o Quarto:</label>
+                <div class="rooms" id="roomsDivs">
+                </div>
+            </div>
+            <input type="hidden" name="room_id" id="room_id">
+        </div>
+    </div>
+
+    <script src="javascript.js"></script>
+</body>
+</html>
