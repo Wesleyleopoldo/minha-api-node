@@ -1,22 +1,78 @@
 const urlClients = "http://localhost:3333/clients";
 const urlRooms = "http://localhost:3333/room";
-const urlReservation = "http://localhost:3333/reservation/";
+const urlReservation = "http://localhost:3333/reservation";
 
-async function fetchUsers() {
+async function indexAllReservations () {
     try {
-        const response = await axios.get(urlClients); // Certifique-se de que esta URL é a correta
-        const users = response.data; // Aqui pegamos os dados da resposta da API
+        const response = await axios.get(urlReservation);
+        const reservations = response.data;
+
+        const reservationsTable = document.getElementById("reservationsTable");
+        reservationsTable.innerHTML = "";
+
+        if (reservations.length === 0) {
+            alert("Nenhuma reserva encontrada!!");
+            return;
+        }
+
+        reservations.forEach(reservation => {
+            const row = document.createElement("tr");
+
+            const reservationDate = convertDateFormat(reservation.reservation_date);
+            
+            const checkinDate = convertDateFormat(reservation.checkin_date);
+            
+            const checkoutDate = convertDateFormat(reservation.checkout_date);
+            
+            row.innerHTML = `
+                <td>${reservation.clientId}</td>
+                <td>${reservation.client_name}</td>
+                <td>${reservation.client_telephone}</td>
+                <td>${reservation.room_type}</td>
+                <td>${reservationDate}</td>
+                <td>${checkinDate}</td>
+                <td>${checkoutDate}</td>
+            `;
+
+            reservationsTable.appendChild(row);
+        });
+    } catch (error) {
+        alert("Algo de errado não está certo: ".concat(error));
+    }
+}
+
+// Converte a data para um formato mais legível para o usuário...
+function convertDateFormat(date) {
+
+    if (date === null) {
+        return "Pendente";
+    }
+
+    else {
+        const options = {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
+        }
+        return new Date(date).toLocaleDateString("pt-BR", options);
+    }
+}
+
+async function indexUsers() {
+    try {
+        const response = await axios.get(urlClients);
+        const users = response.data; // Aqui pegamos os dados da resposta da API...
 
         const usersTable = document.getElementById("usersTable");
-        usersTable.innerHTML = ""; // Limpa a tabela antes de adicionar novos dados
+        usersTable.innerHTML = ""; // Limpa a tabela antes de adicionar novos dados...
 
-        // Verifica se a lista de usuários não está vazia
+        // Verifica se a lista de usuários não está vazia...
         if (users.length === 0) {
             usersTable.innerHTML = "<tr><td colspan='3'>Nenhum usuário encontrado</td></tr>";
             return;
         }
 
-        // Itera sobre cada usuário e cria uma linha na tabela
+        // Itera sobre cada usuário e cria uma linha na tabela...
         users.forEach(user => {
             const row = document.createElement("tr");
             row.innerHTML = `
@@ -25,7 +81,7 @@ async function fetchUsers() {
                 <td>${user.address}</td>
                 <td>${user.telephone}</td>
             `;
-            usersTable.appendChild(row); // Adiciona a linha na tabela
+            usersTable.appendChild(row); // Adiciona a linha na tabela...
         });
     } catch (error) {
         console.error("Erro ao buscar usuários:", error);
@@ -122,7 +178,7 @@ async function createReservation(clientId, roomId, reservationDate) {
         };
 
         // Aqui a requisição do verbo post que contém a url e os dados em formato json...
-        const response = await axios.post(`${urlReservation}${clientId}`, reservationData);
+        const response = await axios.post(`${urlReservation}/${clientId}`, reservationData);
 
         alert("Requisição de reserva realizada com sucesso!");
     } catch (error) {
@@ -137,10 +193,12 @@ document.addEventListener("DOMContentLoaded", function() {
         indexRoomsForCreateReservation();
     } else if (window.location.pathname.includes("indexClients.html")) {
 
-        fetchUsers();
+        indexUsers();
 
     } else if (window.location.pathname.includes("indexRooms.html")) {
         indexAllRooms();
+    } else if(window.location.pathname.includes("indexAllReservations.html")) {
+        indexAllReservations();
     } else {
         console.error("Verifique a URL. Página não encontrada.");
     }

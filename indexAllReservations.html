@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <td>${reservation.clientId}</td>
+                <td>${reservation.client_name}</td>
+                <td>${reservation.client_telephone}</td>
+                <td>${reservation.room_type}</td>
+                <td>${reservationDate}</td>
+                <td>${checkinDate}</td>
+                <td>${checkoutDate}</td> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="javascript.js"></script>
+    <title>Todas as reservas</title>
+</head>
+<body>
+    <div class="table-container">
+        <h2>Reservas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID do Cliente</th>
+                    <th>Nome do Cliente</th>
+                    <th>Telefone do Cliente</th>
+                    <th>Quarto</th>
+                    <th>Data de Reserva</th>
+                    <th>Data de Check-in</th>
+                    <th>Data de Check-out</th>
+                </tr>
+            </thead>
+            <tbody id="reservationsTable">
+                
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
