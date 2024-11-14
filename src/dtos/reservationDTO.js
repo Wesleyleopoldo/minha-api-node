@@ -11,12 +11,13 @@ class reservationDTO {
 };
 
 class allDatasOfReservationsDTO {
-    constructor(reservationId, reservationDate, checkinDate, checkoutDate, clientName, clientAddress, clientTelephone, roomType, diariesPrice)
+    constructor(reservationId, reservationDate, checkinDate, checkoutDate, clientId, clientName, clientAddress, clientTelephone, roomType, diariesPrice)
     {
         this.reservationId = reservationId;
         this.reservation_date = reservationDate;
         this.checkin_date = checkinDate;
         this.checkout_date = checkoutDate;
+        this.clientId = clientId;
         this.client_name = clientName;
         this.client_address = clientAddress;
         this.client_telephone = clientTelephone;

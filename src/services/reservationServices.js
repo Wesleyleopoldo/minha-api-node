@@ -61,7 +61,7 @@ function convertForDTO(reservationdata) {
 // Converte dados especificos para retornar no indexAllReservations...
 function convertAllDatasOfReservations(allDatas) {
 
-    const allDatasOfReservations = allDatas.map(allDataReservations => new reservationDTO.allDatasOfReservationsDTO(allDataReservations.reservationId, allDataReservations.reservation_date, allDataReservations.checkin_date, allDataReservations.checkout_date, allDataReservations.client_name, allDataReservations.client_address, allDataReservations.client_telephone, allDataReservations.room_type, allDataReservations.diaries_price));
+    const allDatasOfReservations = allDatas.map(allDataReservations => new reservationDTO.allDatasOfReservationsDTO(allDataReservations.reservationId, allDataReservations.reservation_date, allDataReservations.checkin_date, allDataReservations.checkout_date, allDataReservations.clientId, allDataReservations.client_name, allDataReservations.client_address, allDataReservations.client_telephone, allDataReservations.room_type, allDataReservations.diaries_price));
 
     return allDatasOfReservations;
 };
